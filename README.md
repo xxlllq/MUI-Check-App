@@ -7,7 +7,7 @@
 <div align="center">
 <kbd>
   <div style="border: 1px solid gainsboro;border-radius: 5px;" align="center">
-    <img width="80%" height="auto" src="https://raw.githubusercontent.com/xxlllq/MUI-Check-App/master/app/Screenshot_20190325-110920.png" alt="First Picture" title="First Picture"/>
+    <img width="100%" height="auto" src="https://raw.githubusercontent.com/xxlllq/MUI-Check-App/master/app/Screenshot_20190325-110920.png" alt="First Picture" title="First Picture"/>
   </div>
 </kbd>
   <kbd>
