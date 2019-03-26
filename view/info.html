@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>任务信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/info.css">
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-upload mui-pull-right" href="javascript:void(0)" id="commitData"></a>
+			<h1 id="title" class="mui-title"></h1>
+		</header>
+
+		<div class="mui-content">
+			<!-- 编号 -->
+			<ul class="mui-table-view" style="margin-top: 0;">
+				<li class="mui-table-view-cell">
+					<div>编　　号：<span class="code" id="code"></span></div>
+				</li>
+			</ul>
+
+			<!-- 文件上传进度条 -->
+			<div id="show-popover" style="position: fixed;width: 100%;"></div>
+			<div id="popover-progressbar" class="mui-popover" style="height: auto;">
+				<div class="bar-text" id="process-num">0</div>
+				<div id="progressbar" class="mui-progressbar mui-progressbar-infinite">
+					<span></span>
+				</div>
+				<!-- <button type="button" class="mui-btn mui-btn-outlined">取消</button> -->
+			</div>
+
+			<!-- 问题记录 -->
+			<div class="mui-table-view-divider">
+				问题记录
+			</div>
+			<div class="mui-row">
+				<div class="mui-input-row textarea">
+					<label><span>*</span>问题描述：</label>
+					<textarea id="problem-description" placeholder="输入描述"></textarea>
+				</div>
+			</div>
+			<div class="mui-input-row">
+				<label><span>*</span>问题分类</label>
+				<select id="problem-category">
+					<option value="INT">INT</option>
+					<option value="EXT">EXT</option>
+					<option value="BIW">BIW</option>
+					<option value="EE">EE</option>
+					<option value="PT">PT</option>
+					<option value="Chasis">Chasis</option>
+				</select>
+			</div>
+			<div class="mui-input-row">
+				<label><span>*</span>问题严重度</label>
+				<select id="problem-severity">
+					<option value="C">C级</option>
+					<option value="B">B级</option>
+					<option value="A">A级</option>
+					<option value="S">S级</option>
+				</select>
+			</div>
+			<div class="mui-input-row problem-score">
+				<label><span>*</span>问题打分</label>
+				<select id="problem-score">
+					<option value="1">1</option>
+					<option value="0.3">0.3</option>
+					<option value="0.1">0.1</option>
+				</select>
+			</div>
+			<div class="mui-input-row road-score" style="display: none;" id="road-score-row">
+				<label><span>*</span>路面打分</label>
+				<select id="road-score">
+					<option value="1">1</option>
+					<option value="0.3">0.3</option>
+					<option value="0.1">0.1</option>
+				</select>
+			</div>
+
+			<div class="mui-table-view-divider">
+				媒体记录
+			</div>
+			<ul class="mui-table-view" style="margin-top: 0;">
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="javascript:void(0)">问题照片
+						<button class="mui-btn mui-icon mui-icon-image" id="selectImage" style="margin-right: 5.25rem;"></button>
+						<button class="mui-btn mui-icon mui-icon-camera" id="getImage" style="margin-right: 1.25rem;"></button>
+						<!-- <button type="button" class="mui-btn mui-btn-royal" onclick="getImage()">拍照</button> -->
+					</a>
+					<div class="mui-collapse-content">
+						<ul id="photoHistroy" class="dlist" style="text-align:left;">
+							<li id="photoEmpty" class="ditem-empty">暂无记录</li>
+						</ul>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="javascript:void(0)">问题音频
+						<button class="mui-btn mui-icon mui-icon-mic" id="startRecord" style="margin-right: 1.25rem;"></button>
+						<!-- <button type="button" class="mui-btn mui-btn-royal" onclick="startRecord()">录音</button> -->
+						<!-- <button type="button" class="mui-btn mui-btn-royal" onclick="startRecord()">录音</button> -->
+					</a>
+					<div class="mui-collapse-content">
+						<ul id="audioHistory" class="dlist" style="text-align:left;">
+							<li id="audioEmpty" class="ditem-empty">暂无记录</li>
+						</ul>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="javascript:void(0)">问题视频
+						<button class="mui-btn mui-icon mui-icon-videocam" id="getVideo" style="margin-right: 1.25rem;"></button>
+						<!-- <button type="button" class="mui-btn mui-btn-royal" onclick="getVideo()">录像</button> -->
+					</a>
+					<div class="mui-collapse-content">
+						<ul id="videoHistroy" class="dlist" style="text-align:left;">
+							<li id="videoEmpty" class="ditem-empty">暂无记录</li>
+						</ul>
+					</div>
+				</li>
+
+			</ul>
+
+			<!-- 其他 -->
+			<div class="mui-table-view-divider">
+				其他
+			</div>
+			<div class="mui-row" id="roadCondition-row" style="display: none;">
+				<div class="mui-input-row textarea">
+					<label>道路工况：</label>
+					<textarea id="roadCondition" placeholder="输入道路工况"></textarea>
+				</div>
+			</div>
+			<div class="mui-row" id="temperatureCondition-row" style="display: none;">
+				<div class="mui-input-row textarea">
+					<label>温度工况：</label>
+					<textarea id="temperatureCondition" placeholder="输入温度工况"></textarea>
+				</div>
+			</div>
+			<div class="mui-row" id="mileageCondition-row" style="display: none;">
+				<div class="mui-input-row textarea">
+					<label>里程工况：</label>
+					<textarea id="mileageCondition" placeholder="输入里程工况"></textarea>
+				</div>
+			</div>
+			<div class="mui-row" id="audioCondition-row" style="display: none;">
+				<div class="mui-input-row textarea">
+					<label>音频工况：</label>
+					<textarea id="audioCondition" placeholder="输入音频工况"></textarea>
+				</div>
+			</div>
+			<div class="mui-row">
+				<div class="mui-input-row textarea">
+					<label>ICA：</label>
+					<textarea id="ICA" placeholder="输入ICA"></textarea>
+				</div>
+			</div>
+
+			<!-- 播放音频 -->
+			<div id="play" class="rp">
+				<div id="ptime" class="ptime">00:00:00/00:00:00</div><br />
+				<div id="progress" class="progress">
+					<div id="schedule" class="schedule"></div>
+				</div>
+				<br />
+				<div class="stop" onclick="stopPlay()"></div>
+			</div>
+			<div id="record" class="rp">
+				<div style="width:100%;height:20%;"></div>
+				<div class="rprogress">
+					<div class="rschedule"></div>
+				</div>
+				<br />
+				<div id="rtime" class="rtime">00:00:00</div><br />
+				<div class="stop" onclick="stopRecord()"></div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/audio.js"></script>
+		<script src="../js/camera.js"></script>
+		<!-- common工具类 -->
+		<script src="../js/common.js"></script>
+		<!-- 本地存储工具 -->
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/server.js"></script>
+		<script src="../viewjs/info.js"></script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/login.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- <header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">登录</h1>
+		</header> -->
+		<div class="mui-content">
+			<img class="logo" src="../images/logo.png" />
+			<form id='login-form' class="mui-input-group">
+				<div class="mui-input-row">
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="账号" value="admin">
+				</div>
+				<div class="mui-input-row">
+					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="密码" value="123456">
+				</div>
+			</form>
+			<!-- <form class="mui-input-group">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						自动登录
+						<div id="autoLogin" class="mui-switch">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+				</ul>
+			</form> -->
+			<div class="operate">
+				<button id='loginBtn' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+				</div>
+			</div>
+			<nav class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				朗德科技技术所有
+			</nav>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.enterfocus.js"></script>
+		<!-- common工具类 -->
+		<script src="../js/common.js"></script>
+		<!-- 本地存储工具 -->
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/server.js"></script>
+		<script src="../viewjs/login.js"></script>
+	</body>
+</html>

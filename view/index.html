@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<!-- 整个App入口界面 -->
+		<title>App入口界面</title>
+		<script src="../js/mui.min.js"></script>
+		<!-- common工具类 -->
+		<script src="../js/common.js"></script>
+		<!-- 本地存储工具 -->
+		<script src="../js/myStorage.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+
+			// 根据用户信息的有无,控制页面跳转.
+			function checkTurnView() {
+				// 是否有用户信息
+				if (myStorage) {
+					mui.openWindow({
+						url: "login.html",
+						id: "login.html"
+					});
+					return;
+					
+					var user = myStorage.getItem('currentUser');
+					// 有则直接跳转到main界面
+					if (user) {
+						mui.openWindow({
+							"id": 'main',
+							"url": 'main.html'
+						});
+					}
+					// 否则跳转到login界面
+					else {
+						mui.openWindow({
+							url: "login.html",
+							id: "login.html"
+						});
+					}
+				} else {
+					plus.nativeUI.toast('系统初始化错误！');
+				}
+			}
+
+			if (window.plus) {
+				checkTurnView();
+			} else {
+				document.addEventListener('plusready', checkTurnView, false);
+			}
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

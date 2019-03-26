@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+
+	<body>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="#tabbar-home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<!--<a class="mui-tab-item" href="#">
+				<span class="mui-icon mui-icon-settings"></span>
+				<span class="mui-tab-label">面板</span>
+			</a> -->
+			<a class="mui-tab-item" href="#tabbar-person">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">个人</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<!-- <input type="file" /> -->
+			<div id="tabbar-home" class="mui-control-content mui-active">
+				<div id="generatelist"></div>
+			</div>
+			<!-- 详情展示 -->
+			<div id="tabbar-person" class="mui-control-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<img class="mui-media-object mui-pull-left" src="http://thyrsi.com/t6/676/1551770892x2890203049.jpg" onerror="javascript:this.src='../images/user/common-avatar.png';">
+							<div class="mui-media-body">
+								<p class="name" id="username"></p>
+								<p class='mui-ellipsis' id="usercode"></p>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<!-- <li class="mui-table-view-cell">
+						<span>仅上传数据</span>
+						<div class="mui-switch mui-switch-mini">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li> -->
+					<li class="mui-table-view-cell">版本
+						<span class="mui-badge mui-badge-custom">1.2.1</span>
+					</li>
+				</ul>
+
+				<ul class="mui-table-view" style="margin-top: 1.5625rem;">
+					<li class="mui-table-view-cell" id="exit">
+						<a style="text-align:center;color: #445CFE;">
+							退出登录
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/template.js"></script>
+	<!-- common工具类 -->
+	<script src="../js/common.js"></script>
+	<!-- 本地存储工具 -->
+	<script src="../js/myStorage.js"></script>
+	<script src="../js/server.js"></script>
+	<script src="../viewjs/main.js"></script>
+	<script type="text/html" id="generate-task-row">
+		<%for(var i=0;i<rows.length;i++){ 
+			   var row=rows[i]; 
+			   if(row){
+				%> 
+			   <div class="task-row">
+				<div class="mui-row">
+					<div class="mui-col-sm-8 mui-col-xs-8">
+						<div href="javascript:void(0)" >
+							<span class="title"><%=row.CarModelName%>(<%=row.Site%>)</span>
+							<div class="time"><%=/\d{4}-\d{1,2}-\d{1,2}/g.exec(row.Time)%></div>
+						</div>
+					</div>
+					<div class="mui-col-sm-4 mui-col-xs-4">
+						<div class="mui-pull-right">
+							<a href="#<%=row.Id%>" class="mui-icon mui-icon-list"></a>
+						</div>
+					</div>
+				</div> 
+				<%var testModel = row.TestContentModel;
+				  if(testModel){
+				%>
+				<div class="task-detail" <%if(i==0){%>style="display:block"<%}%>>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<%if(testModel.length>0){%>
+						<%for(var k=0;k<testModel.length;k++){%>
+						<li class="mui-table-view-cell">
+							<a href="javascript:void(0)" onclick="turnToTaskDetail('<%=row.Id%>','<%=testModel[k].Id%>','<%=testModel[k].Value%>','<%=testModel[k].Name%>')" class="mui-navigate-right"><%=testModel[k].Name%><span class="mui-pull-right right" <%if(testModel[k].HasChecked){%>style="color: #445CFE;" <%}%>><%=testModel[k].Code?testModel[k].Code:'未知'%></span></a>
+						</li>
+						<%}%>
+						<%}else{%>
+						<li class="mui-table-view-cell">
+							暂无数据
+						</li>
+						<%}%>
+					</ul>
+				</div>
+				<div id="<%=row.Id%>" class="mui-popover">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">样车阶段：<%=row.Stage?row.Stage:'无'%></li>
+					<li class="mui-table-view-cell">里　　程：<%=row.Mileage?row.Mileage:'无'%></li>
+					<li class="mui-table-view-cell">　VIN号 ：<%=row.VIN?row.VIN:'无'%></li>
+					<li class="mui-table-view-cell">车辆编号：<%=row.VehicleNum?row.VehicleNum:'无'%></li>
+					<li class="mui-table-view-cell">样车配置：<%=row.Configuration?row.Configuration:'无'%></li>
+				</ul>
+				</div>
+				<%}%>  
+			   </div>
+			<%}}%>  
+	</script>
+</html>
