@@ -1,12 +1,9 @@
 //获取后端接口URL
 function serverUrl() {
-	// return "http://116.62.173.115:8081/api";
-	// return "https://xxlllq.xyz/api";
 	return serverUrlWidthoutApi() + "/api";
 }
 
 function serverUrlWidthoutApi() {
-	// return "https://xxlllq.xyz/";
 	return "http://192.168.0.132:1982";
 }
 //获取后端接口URL
