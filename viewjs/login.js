@@ -28,13 +28,13 @@ function plusReady() {
 			password: passwordBox.value
 		};
 		// 登录数据合法性验证
-		if (loginInfo.account.length < 5) {
-			plus.nativeUI.toast('账号最短为 5 个字符');
+		if (!loginInfo.account || loginInfo.account.length < 0) {
+			plus.nativeUI.toast('账号不能为空');
 			// loginButton.removeAttribute("disabled");
 			return;
 		}
-		if (loginInfo.password.length < 6) {
-			plus.nativeUI.toast('密码最短为 6 个字符');
+		if (!loginInfo.password || loginInfo.password.length < 0) {
+			plus.nativeUI.toast('密码不能为空');
 			// loginButton.removeAttribute("disabled");
 			return;
 		}
