@@ -20,7 +20,7 @@ function plusReady() {
 	}
 
 	//设置部分元素是否可见
-	if (type == "RT") {
+	if (type == "RT" || type == "DT") {
 		$("#road-score-row").show(); //路试的时候，显示道路打分
 	}
 	if (type == "RT" || type == "FT" || type == "VT" || type == "DT") {

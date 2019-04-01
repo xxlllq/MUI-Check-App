@@ -106,6 +106,7 @@ function pulluploading() {
 var page = 1;
 
 function plusReady() {
+	document.activeElement.blur(); //关闭软键盘 
 	// 根据用户信息的有无,控制页面跳转.
 	var user = myStorage.getItem('currentUser');
 	// 	var loginPage = plus.webview.getWebviewById("login");
@@ -124,6 +125,7 @@ function plusReady() {
 		});
 		return;
 	}
+	
 	$("#username").text(user.TrueName ? user.TrueName : '未知');
 	$("#usercode").text(user.UserName ? user.UserName : 'UnKnown');
 	// 处理返回键
@@ -190,16 +192,19 @@ document.getElementById('exit').addEventListener('tap', function() {
 				$("#generatelist").empty(); //清空数据
 				$("#username").text('');
 				$("#usercode").text('');
-				plus.webview.currentWebview().close();
-
+				var id = setInterval(function() {
+					clearInterval(id);
+					plus.webview.currentWebview().hide();
+					plus.webview.currentWebview().close();
+				}, 200);
 				// plus.webview.getLaunchWebview().show("pop-in");
 				//若启动页不是登录页，则需通过如下方式打开登录页
 				mui.openWindow({
 					url: 'login.html',
 					id: 'login',
-					show: {
-						aniShow: 'pop-in'
-					}
+// 					show: {
+// 						aniShow: 'pop-in'
+// 					}
 				});
 				break;
 			case 2:

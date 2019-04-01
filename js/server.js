@@ -4,7 +4,7 @@ function serverUrl() {
 }
 
 function serverUrlWidthoutApi() {
-	return "http://192.168.0.132:1982";
+	return "http://192.168.0.102:1982";
 }
 //获取后端接口URL
 function serverOperateUrl(url) {

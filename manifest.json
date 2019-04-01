@@ -5,7 +5,7 @@
     "name" : "异响Online Brief",
     /*应用名称，程序桌面图标名称*/
     "version" : {
-        "name" : "1.0.0",
+        "name" : "1.2.3",
         /*应用版本名称*/
         "code" : "83"
     },
@@ -44,7 +44,8 @@
         },
         "Speech" : {
             "description" : "管理语音识别插件"
-        }
+        },
+        "Push" : {}
     },
     "plus" : {
         "splashscreen" : {
@@ -68,7 +69,13 @@
                 "devices" : "universal",
                 /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
                 "frameworks" : [],
-                "plistcmds" : [ "Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true" ]
+                "plistcmds" : [ "Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true" ],
+                "privacyDescription" : {
+                    "NSPhotoLibraryUsageDescription" : "选择相关图片上传",
+                    "NSCameraUsageDescription" : "调用摄像头进行拍照、录像进行图片、视频的采集",
+                    "NSMicrophoneUsageDescription" : "调用麦克风进行音频采集",
+                    "NSLocationWhenInUseUsageDescription" : "获取当前位置"
+                }
             },
             "google" : {
                 "packagename" : "",
@@ -102,6 +109,7 @@
                     "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
@@ -128,7 +136,15 @@
                         /*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
                         "settings-normal" : "",
                         /*iPhone设置页面程序图标，分辨率：29x29*/
-                        "settings-retina" : ""
+                        "settings-retina" : "",
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
                     },
                     "ipad" : {
                         "normal" : "",
@@ -149,19 +165,30 @@
                         /*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
                         "settings-normal" : "",
                         /*iPad设置页面程序图标，分辨率：29x29*/
-                        "settings-retina" : ""
-                    }
+                        "settings-retina" : "",
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                    },
+                    "appstore" : "unpackage/iOS/icon-1024.png"
                 },
                 "android" : {
-                    "mdpi" : "",
+                    "mdpi" : "unpackage/res/icons/48x48.png",
                     /*普通屏程序图标，分辨率：48x48*/
-                    "ldpi" : "",
+                    "ldpi" : "unpackage/res/icons/48x48.png",
                     /*大屏程序图标，分辨率：48x48*/
-                    "hdpi" : "",
+                    "hdpi" : "unpackage/res/icons/72x72.png",
                     /*高分屏程序图标，分辨率：72x72*/
-                    "xhdpi" : "",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
                     /*720P高分屏程序图标，分辨率：96x96*/
-                    "xxhdpi" : ""
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
                 }
             },
             "splashscreen" : {

@@ -4,6 +4,16 @@ mui.init({
 
 // H5 plus事件处理
 function plusReady() {
+// 	var curr = plus.webview.currentWebview();
+// 	var wvs = plus.webview.all();
+// 	console.info(wvs.length)
+// 	for (var i = 0, len = wvs.length; i < len; i++) {
+// 		//关闭除主页页面外的其他页面
+// 		if (wvs[i].getURL() == curr.getURL())
+// 			continue;
+// 		plus.webview.close(wvs[i]);
+// 	}
+
 	preventFooterPromote(); //防止底部文字打开软键盘的时候被推动
 	//  检测是否有网络，待写
 
@@ -13,7 +23,7 @@ function plusReady() {
 	}, false);
 
 	plus.screen.lockOrientation("portrait-primary");
-	
+
 	var loginButton = document.getElementById('loginBtn'); //登录按钮
 	var accountBox = document.getElementById('account'); //账号
 	var passwordBox = document.getElementById('password'); //密码
@@ -27,6 +37,7 @@ function plusReady() {
 			account: accountBox.value,
 			password: passwordBox.value
 		};
+
 		// 登录数据合法性验证
 		if (!loginInfo.account || loginInfo.account.length < 0) {
 			plus.nativeUI.toast('账号不能为空');
@@ -40,8 +51,8 @@ function plusReady() {
 		}
 		//防止重复点击按钮
 		loginButton.setAttribute("disabled", true);
-		document.activeElement.blur(); //关闭软键盘
-		
+		accountBox.blur();
+
 		//远程登录验证
 		var wt = plus.nativeUI.showWaiting();
 		mui.ajax(serverUrl() + "/Account/Login", {
@@ -53,10 +64,10 @@ function plusReady() {
 			dataType: 'json', //服务器返回json格式数据
 			type: 'GET', //HTTP请求类型
 			success: function(data) {
+				accountBox.blur();
 				if (data) {
-					if (data.type == 1) { 
+					if (data.type == 1) {
 						myStorage.setItem('currentUser', data.value); //设置本地缓存
-
 						mui.openWindow({
 							"id": 'main',
 							"url": 'main.html'
