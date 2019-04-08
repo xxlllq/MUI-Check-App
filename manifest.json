@@ -5,7 +5,7 @@
     "name" : "异响Online Brief",
     /*应用名称，程序桌面图标名称*/
     "version" : {
-        "name" : "1.2.3",
+        "name" : "1.3.1",
         /*应用版本名称*/
         "code" : "83"
     },
@@ -74,7 +74,9 @@
                     "NSPhotoLibraryUsageDescription" : "选择相关图片上传",
                     "NSCameraUsageDescription" : "调用摄像头进行拍照、录像进行图片、视频的采集",
                     "NSMicrophoneUsageDescription" : "调用麦克风进行音频采集",
-                    "NSLocationWhenInUseUsageDescription" : "获取当前位置"
+                    "NSLocationWhenInUseUsageDescription" : "用于获取检测路段的经纬度",
+                    "NSLocationAlwaysUsageDescription" : "用于获取检测路段的经纬度",
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "用于获取检测路段的经纬度"
                 }
             },
             "google" : {

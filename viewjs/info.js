@@ -179,7 +179,7 @@ mui('.mui-bar').on('tap', '#commitData', function(e) {
 		AudioCondition: $("#audioCondition").val(), //音频工况
 		MileageCondition: $("#mileageCondition").val(), //里程工况
 		ICA: $("#ICA").val(), //ICA
-		Location: getLocation(), //经纬度
+		// Location: getLocation(), //经纬度
 		TestDetailId: testDetailId,
 		ModifyUser: user.UserId
 	}

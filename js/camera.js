@@ -56,10 +56,15 @@ mui('.mui-table-view .mui-navigate-right').on('tap', '#selectImage', function(e)
 	e.stopPropagation();
 	selectImage();
 });
+mui('.mui-table-view .mui-navigate-right').on('tap', '#selectVideo', function(e) {
+	e.stopPropagation();
+	selectVideo();
+});
 mui('.mui-table-view .mui-navigate-right').on('tap', '#getVideo', function(e) {
 	e.stopPropagation();
 	getVideo();
 });
+
 // 拍照
 function getImage() {
 	//console.info('开始拍照：');
@@ -140,6 +145,38 @@ function selectImage() {
 	});
 }
 
+//选取视频
+function selectVideo() {
+	plus.gallery.pick(function(path) {
+			if (path) {
+				try {
+					plus.io.resolveLocalFileSystemURL(path, function(fileEntry) {
+						plus.io.resolveLocalFileSystemURL('_doc/camera/' + businessIdInCamera, function(newPath) {
+							plus.io.resolveLocalFileSystemURL("file:///" + newPath.fullPath + '/' + fileEntry.name, function(entry) {},
+								function() {
+									//不存在就移动
+									fileEntry.copyTo(newPath, '', function(entry) {
+										createItem(entry);
+									}, function(e) {
+										console.log("复制失败");
+									});
+								})
+						})
+					}, function(e) {
+						console.info(JSON.stringify(e));
+					})
+				} catch (e) {
+					console.log(e);
+				}
+			}
+		},
+		function(e) {
+			console.log("取消选择视频");
+		}, {
+			filter: "video",
+			filename: '_doc/gallery/'
+		});
+}
 // 录像
 function getVideo() {
 	//console.info('开始录像：');
@@ -169,7 +206,11 @@ function displayFile(li) {
 		return;
 	}
 	var name = li.entry.name;
+	console.info(name)
 	var suffix = name.substr(name.lastIndexOf('.'));
+	if (suffix) {
+		suffix = suffix.toLowerCase();
+	}
 	var url = '';
 	if (suffix == '.mov' || suffix == '.3gp' || suffix == '.mp4' || suffix == '.avi') {
 		//if(unv){plus.runtime.openFile('_doc/camera/'+name);return;}
@@ -202,6 +243,9 @@ function displayServerFile(path) {
 	}
 
 	var suffix = path.substr(path.lastIndexOf('.'));
+	if(suffix){
+		suffix = suffix.toLowerCase();
+	}
 	var url = '';
 	if (suffix == '.mov' || suffix == '.3gp' || suffix == '.mp4' || suffix == '.avi') {
 		//if(unv){plus.runtime.openFile('_doc/camera/'+name);return;}
@@ -234,6 +278,8 @@ function createItem(entry) {
 
 	var name = entry.name;
 	var suffix = name.substr(name.lastIndexOf('.'));
+	if (suffix)
+		suffix = suffix.toLowerCase();
 	var isVideo = (suffix == '.mov' || suffix == '.3gp' || suffix == '.mp4' || suffix == '.avi');
 	if (isVideo) {
 		videohl.insertBefore(li, videole.nextSibling);

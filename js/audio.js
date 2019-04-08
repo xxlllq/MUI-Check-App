@@ -188,7 +188,6 @@ function playServerAudio(id, name) {
 				if (status == 200) {
 					//下载成功并播放音频
 					wt.close();
-					console.info(d.filename)
 					startPlay(d.filename);
 				} else {
 					console.info()("下载失败");
