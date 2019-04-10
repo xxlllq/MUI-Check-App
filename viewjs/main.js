@@ -109,14 +109,6 @@ function plusReady() {
 	document.activeElement.blur(); //关闭软键盘 
 	// 根据用户信息的有无,控制页面跳转.
 	var user = myStorage.getItem('currentUser');
-	// 	var loginPage = plus.webview.getWebviewById("login");
-	// 	console.info(loginPage)
-	// 	if (!loginPage) {
-	// 		loginPage = mui.preload({
-	// 			id: 'login',
-	// 			url: 'login.html'
-	// 		});
-	// 	}
 	// 无用户信息跳转到login界面
 	if (!user || user.OverTime == null || new Date(user.OverTime).getTime() < new Date().getTime()) {
 		mui.openWindow({
@@ -125,11 +117,26 @@ function plusReady() {
 		});
 		return;
 	}
-	
+
 	$("#username").text(user.TrueName ? user.TrueName : '未知');
 	$("#usercode").text(user.UserName ? user.UserName : 'UnKnown');
 	// 处理返回键
 	dealBackBtn();
+}
+
+//新建测试详情
+function addTestDetail(id, carModelName, carModelCode) {
+	if (id) {
+		mui.openWindow({
+			url: 'addTestDetail.html',
+			id: 'addTestDetail',
+			extras: {
+				testTaskId: id, //任务详情（子任务）Id
+				carModelName: carModelName, //车型名称
+				carModelCode: carModelCode, //车型编号
+			}
+		});
+	}
 }
 
 //点击列表所在行触发的事件
@@ -139,10 +146,11 @@ function turnToTaskDetail(id, testDetailId, type, title) {
 			url: 'info.html',
 			id: 'info',
 			extras: {
-				businessId: testDetailId, //任务详情（子任务）Id
-				testDetailId: testDetailId,
+				businessId: testDetailId, //任务Id
+				testDetailId: testDetailId, //任务详情（子任务）Id
 				type: type, //静态、影音系统工作异响测试、路试、零部件台架、耐久
-				title: title //标题
+				title: title, //标题
+				needReload: false,
 			}
 		});
 	}
@@ -202,9 +210,9 @@ document.getElementById('exit').addEventListener('tap', function() {
 				mui.openWindow({
 					url: 'login.html',
 					id: 'login',
-// 					show: {
-// 						aniShow: 'pop-in'
-// 					}
+					// 					show: {
+					// 						aniShow: 'pop-in'
+					// 					}
 				});
 				break;
 			case 2:
@@ -235,6 +243,11 @@ function dealBackBtn() {
 	}, false);
 }
 
+//刷新
+window.addEventListener('refresh', function(e) { //执行刷新
+	if (e && e.detail && e.detail.needReload == true)
+		mui('#tabbar-home').pullRefresh().pulldownLoading();
+});
 if (window.plus) {
 	plusReady();
 } else {

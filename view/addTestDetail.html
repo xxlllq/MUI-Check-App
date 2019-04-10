@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>新建测试详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/mui.picker.min.css">
+		<link rel="stylesheet" href="../css/info.css">
+		<link rel="stylesheet" href="../css/addTestDetail.css">
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="addTestDetailTitle" class="mui-title"></h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-input-row">
+				<label><span>*</span>测试内容</label>
+				<select id="test-content">
+				</select>
+			</div>
+			<div class="mui-row">
+				<div class="mui-input-row textarea">
+					<label>问题描述：</label>
+					<textarea id="problem-description" placeholder="输入描述"></textarea>
+				</div>
+			</div>
+			<div class="mui-input-row">
+				<label>问题分类</label>
+				<select id="problem-category">
+					<option value="INT">INT</option>
+					<option value="EXT">EXT</option>
+					<option value="BIW">BIW</option>
+					<option value="EE">EE</option>
+					<option value="PT">PT</option>
+					<option value="Chasis">Chasis</option>
+				</select>
+			</div>
+			<div class="mui-input-row">
+				<label>问题严重度</label>
+				<select id="problem-severity">
+					<option value="C">C级</option>
+					<option value="B">B级</option>
+					<option value="A">A级</option>
+					<option value="S">S级</option>
+				</select>
+			</div>
+			<div class="mui-input-row problem-score">
+				<label>问题打分</label>
+				<select id="problem-score">
+					<option value="1">1</option>
+					<option value="0.3">0.3</option>
+					<option value="0.1">0.1</option>
+				</select>
+			</div>
+			<div class="mui-row">
+				<div class="mui-input-row textarea">
+					<label>ICA：</label>
+					<textarea id="ICA" placeholder="输入ICA"></textarea>
+				</div>
+			</div>
+		</div>
+		<button id='createAndReturn' data-loading-text="创建中" class="mui-btn mui-btn-primary mui-btn-outlined mui-disabled">创建后返回主页</button>
+		<button id='createAndTest' data-loading-text="创建中" class="mui-btn mui-btn-primary mui-btn-outlined mui-disabled">创建后直接检测</button>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<!-- common工具类 -->
+		<script src="../js/common.js"></script>
+		<!-- 本地存储工具 -->
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/server.js"></script>
+		<script src="../viewjs/addTestDetail.js"></script>
+	</body>
+</html>

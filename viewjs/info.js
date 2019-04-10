@@ -1,14 +1,31 @@
+mui.init({
+	beforeback: function() {
+		var current = plus.webview.currentWebview();
+		if (current)
+			current.close();
+		var mainView = plus.webview.getWebviewById('main'); //打开主页
+		if (mainView) {
+			mui.fire(mainView, 'refresh', {
+				needReload: needReload //主页是否执行数据重新加载
+			});
+			mainView.show();
+		}
+		return false;
+	}
+});
 // H5 plus事件处理
 var testDetailId = null,
 	task = null,
-	type = null;
+	type = null,
+	needReload = false;
 
 function plusReady() {
 	//获取传递的参数、更改标题
 	var self = plus.webview.currentWebview();
 	var title = self.title;
 	testDetailId = self.testDetailId, type = self.type; ////静态、影音系统工作异响测试、路试、零部件台架、耐久
-
+	needReload = self.needReload;//返回主页面时候，主页面是否需要重新加载
+	
 	if (title) {
 		//更新标题
 		mui('#title')[0].innerText = title;
@@ -61,7 +78,7 @@ function plusReady() {
 						createAudioItemServer(audio[i]);
 					}
 				}
-				
+
 				//更新照片列表
 				let picture = data.Picture;
 				if (picture) {
@@ -70,7 +87,7 @@ function plusReady() {
 						createPhotoServerItem(picture[i]);
 					}
 				}
-				
+
 				//更新视频列表
 				let video = data.Video;
 				if (video) {
@@ -114,13 +131,13 @@ mui('.mui-bar').on('tap', '#commitData', function(e) {
 			count += 1;
 			var num = Math.ceil(10240 * count / t.totalSize * 100);
 			num = num > 100 ? 100 : num;
-			$("#popover-progressbar #process-num").text(num == 100 ? '请求成功，正在写入数据' : (num + "%"));
+			$("#popover-progressbar #process-num").text(num == 100 ? '正在写入数据，请耐心等待' : (num + "%"));
 		}
 		if (t.state == 4) {
 			if (status == 200) {
 				let responseText = t.responseText;
 				if (responseText) {
-					let responseData = JSON.parse(responseText);//respone
+					let responseData = JSON.parse(responseText); //respone
 					if (responseData) {
 						let audioInserver = JSON.parse(responseData.audio); //服务器返回的音频文件列表
 						if (audioInserver && audioInserver.length > 0) {
@@ -129,7 +146,7 @@ mui('.mui-bar').on('tap', '#commitData', function(e) {
 								createAudioItemServer(audioInserver[i]);
 							}
 						}
-						
+
 						let photoInserver = JSON.parse(responseData.photo); //服务器返回的照片文件列表
 						if (photoInserver && photoInserver.length > 0) {
 							$("#photoHistroy").empty();
@@ -137,7 +154,7 @@ mui('.mui-bar').on('tap', '#commitData', function(e) {
 								createPhotoServerItem(photoInserver[i]);
 							}
 						}
-						
+
 						let videoInserver = JSON.parse(responseData.video); //服务器返回的视频文件列表
 						if (videoInserver && videoInserver.length > 0) {
 							$("#videoHistroy").empty();
@@ -149,6 +166,7 @@ mui('.mui-bar').on('tap', '#commitData', function(e) {
 				}
 
 				plus.nativeUI.toast('上传完成');
+				needReload = true;
 				mui("#popover-progressbar").popover('hide', popover);
 				//删除临时文件夹目录
 				removeFile('camera', function(re) { //删除视频与图片

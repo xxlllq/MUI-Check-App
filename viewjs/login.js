@@ -4,16 +4,6 @@ mui.init({
 
 // H5 plus事件处理
 function plusReady() {
-// 	var curr = plus.webview.currentWebview();
-// 	var wvs = plus.webview.all();
-// 	console.info(wvs.length)
-// 	for (var i = 0, len = wvs.length; i < len; i++) {
-// 		//关闭除主页页面外的其他页面
-// 		if (wvs[i].getURL() == curr.getURL())
-// 			continue;
-// 		plus.webview.close(wvs[i]);
-// 	}
-
 	preventFooterPromote(); //防止底部文字打开软键盘的时候被推动
 	//  检测是否有网络，待写
 
@@ -69,8 +59,8 @@ function plusReady() {
 					if (data.type == 1) {
 						myStorage.setItem('currentUser', data.value); //设置本地缓存
 						mui.openWindow({
-							"id": 'main',
-							"url": 'main.html'
+							id: 'main',
+							url: 'main.html'
 						}); //跳转到主页
 					} else {
 						plus.nativeUI.toast(data.message);

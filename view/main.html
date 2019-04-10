@@ -51,7 +51,7 @@
 						</div>
 					</li> -->
 					<li class="mui-table-view-cell">当前版本
-						<span class="mui-badge mui-badge-custom">1.3.1</span>
+						<span class="mui-badge mui-badge-custom">1.4.0</span>
 					</li>
 				</ul>
 
@@ -82,14 +82,17 @@
 			   <div class="task-row">
 				<div class="mui-row">
 					<div class="mui-col-sm-8 mui-col-xs-8">
-						<div href="javascript:void(0)" >
+						<div>
 							<span class="title"><%=row.CarModelName%>(<%=row.Site%>)</span>
-							<div class="time"><%=/\d{4}-\d{1,2}-\d{1,2}/g.exec(row.Time)%></div>
+							<div class="time">时间:<%=/\d{4}-\d{1,2}-\d{1,2}/g.exec(row.Time)%>　车辆编号:<%=row.VehicleNum?row.VehicleNum:'无'%></div>
 						</div>
 					</div>
 					<div class="mui-col-sm-4 mui-col-xs-4">
 						<div class="mui-pull-right">
 							<a href="#<%=row.Id%>" class="mui-icon mui-icon-list"></a>
+						</div>
+						<div class="mui-pull-right">
+							<a href="javascript:void(0)" onclick="addTestDetail('<%=row.Id%>','<%=row.CarModelName%>','<%=row.CarModelCode%>')" class="mui-icon mui-icon-plusempty"></a>
 						</div>
 					</div>
 				</div> 
@@ -115,8 +118,7 @@
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">样车阶段：<%=row.Stage?row.Stage:'无'%></li>
 					<li class="mui-table-view-cell">里　　程：<%=row.Mileage?row.Mileage:'无'%></li>
-					<li class="mui-table-view-cell">　VIN号 ：<%=row.VIN?row.VIN:'无'%></li>
-					<li class="mui-table-view-cell">车辆编号：<%=row.VehicleNum?row.VehicleNum:'无'%></li>
+					<li class="mui-table-view-cell">　VIN号 ：<%=row.VIN?row.VIN:'无'%></li> 
 					<li class="mui-table-view-cell">样车配置：<%=row.Configuration?row.Configuration:'无'%></li>
 				</ul>
 				</div>
