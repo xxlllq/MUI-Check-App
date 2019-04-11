@@ -51,7 +51,7 @@
 						</div>
 					</li> -->
 					<li class="mui-table-view-cell">当前版本
-						<span class="mui-badge mui-badge-custom">1.4.0</span>
+						<span class="mui-badge mui-badge-custom">1.4.1</span>
 					</li>
 				</ul>
 
@@ -103,8 +103,14 @@
 					<ul class="mui-table-view mui-table-view-chevron">
 						<%if(testModel.length>0){%>
 						<%for(var k=0;k<testModel.length;k++){%>
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" idStr='<%=testModel[k].Id%>'>
+							<div class="mui-slider-handle">
+							</div>
+							<div class="mui-slider-right mui-disabled">
+								<a class="mui-btn mui-btn-red"></a>
+							</div>
 							<a href="javascript:void(0)" onclick="turnToTaskDetail('<%=row.Id%>','<%=testModel[k].Id%>','<%=testModel[k].Value%>','<%=testModel[k].Name%>')" class="mui-navigate-right"><%=testModel[k].Name%><span class="mui-pull-right right" <%if(testModel[k].HasChecked){%>style="color: #445CFE;" <%}%>><%=testModel[k].Code?testModel[k].Code:'未知'%></span></a>
+							<p><%=testModel[k].Description?testModel[k].Description:''%></p>
 						</li>
 						<%}%>
 						<%}else{%>

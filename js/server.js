@@ -1,7 +1,5 @@
 //获取后端接口URL
 function serverUrl() {
-	// return "http://116.62.173.115:8081/api";
-	// return "https://xxlllq.xyz/api";
 	return serverUrlWidthoutApi() + "/api";
 }
 
@@ -42,8 +40,9 @@ function sendRequestToServer(url, method, data, _callback) {
 				if (data) {
 					if (data.type == 1)
 						_callback(data);
-					else
-						plus.nativeUI.toast(data.message);
+					else {
+						_callback(null);
+					}
 				}
 			},
 			error: function(xhr, type, errorThrown) {

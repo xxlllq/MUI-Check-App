@@ -205,14 +205,10 @@ document.getElementById('exit').addEventListener('tap', function() {
 					plus.webview.currentWebview().hide();
 					plus.webview.currentWebview().close();
 				}, 200);
-				// plus.webview.getLaunchWebview().show("pop-in");
 				//若启动页不是登录页，则需通过如下方式打开登录页
 				mui.openWindow({
 					url: 'login.html',
-					id: 'login',
-					// 					show: {
-					// 						aniShow: 'pop-in'
-					// 					}
+					id: 'login'
 				});
 				break;
 			case 2:
@@ -242,6 +238,38 @@ function dealBackBtn() {
 		}
 	}, false);
 }
+//左滑删除
+var btnArray = ['确认', '取消'];
+$('#generatelist').on('slideleft', '.task-detail .mui-table-view-cell', function(event) {
+	var elem = this;
+	mui.confirm('是否删除该条任务详情记录？', '', btnArray, function(e) {
+		if (e.index == 0) {
+			var id = elem.getAttribute("idStr");
+			if (id) {
+				var wt = plus.nativeUI.showWaiting();
+				sendRequestToServer("/TestTask/DeleteTestDetail", "", {
+					Id: id
+				}, function(result) {
+					if (result && result.type == 1) {
+						elem.parentNode.removeChild(elem);
+						plus.nativeUI.toast(result.message);
+					} else {
+						plus.nativeUI.toast('删除过程中出现错误');
+					}
+					mui.swipeoutClose(elem);
+					wt.close();
+				});
+			} else {
+				plus.nativeUI.toast('获取行数据Id失败');
+			}
+		} else {
+			setTimeout(function() {
+				mui.swipeoutClose(elem);
+			}, 0);
+		}
+	});
+});
+
 
 //刷新
 window.addEventListener('refresh', function(e) { //执行刷新
