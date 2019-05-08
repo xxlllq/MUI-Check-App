@@ -70,6 +70,8 @@ function plusReady() {
 				$("#audioCondition").val(data.AudioCondition); //音频工况
 				$("#mileageCondition").val(data.MileageCondition); //里程工况
 				$("#ICA").val(data.ICA); //ICA
+				$("#problem-reason").val(data.ProblemReason); //问题原因
+				
 				//更新音频列表
 				let audio = data.Audio;
 				if (audio) {
@@ -197,6 +199,7 @@ mui('.mui-bar').on('tap', '#commitData', function(e) {
 		AudioCondition: $("#audioCondition").val(), //音频工况
 		MileageCondition: $("#mileageCondition").val(), //里程工况
 		ICA: $("#ICA").val(), //ICA
+		ProblemReason: $("#problem-reason").val(),//问题原因
 		// Location: getLocation(), //经纬度
 		TestDetailId: testDetailId,
 		ModifyUser: user.UserId

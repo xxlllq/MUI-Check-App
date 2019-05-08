@@ -81,6 +81,7 @@ function createTestDetail(flag) {
 				Severity: $("#problem-severity").val(), //问题严重度
 				ProblemScore: $("#problem-score").val(), //问题打分
 				ICA: $("#ICA").val(), //ICA
+				ProblemReason: $("#problem-reason").val()//问题原因
 			}
 			sendRequestToServer("/TestTask/CreateTestDetail", "", commitData, function(result) {
 				if (result) {
