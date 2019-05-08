@@ -2,14 +2,14 @@
     "@platforms" : [ "android", "iPhone", "iPad" ],
     "id" : "H53EF211E",
     /*应用的标识，创建应用时自动生成，勿手动修改*/
-    "name" : "异响Online Brief",
+    "name" : "异响",
     /*应用名称，程序桌面图标名称*/
     "version" : {
         "name" : "1.4.2",
         /*应用版本名称*/
         "code" : "83"
     },
-    "description" : "异响online brief app软件",
+    "description" : "异响",
     /*应用描述信息*/
     "icons" : {
         "72" : "icon.png"
